@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Hello World
+        </title>
+    </head>
+    <body>
+        <button id = 'to-do button' onclick= "changebuttonname()"> hello i am button name</button>
+        <div id = 'counter'>0</div>
+        <button onclick="upCounter()">Up</button>
+        <button onclick="downCounter()">Down</button>
+
+        <button id = 'Put a div' onclick= "PutAdivOnPage()" style="display: block; margin-top: 10px"> put me in div</button>
+
+    </body>
+
+    <script>  
+
+        function changebuttonname(){
+                let buttonvalue = document.getElementById('to-do button');
+                buttonvalue.innerText = 'done'
+                console.log(buttonvalue.innerText);
+                booleanvalue = 'false';
+                console.log(booleanvalue);
+        }
+
+        function upCounter(){
+          let count = document.getElementById('counter');
+          let countValue = parseInt(count.innerText);
+          count.innerText = countValue + 1;
+          console.log(count.innerText);
+        }
+
+        function downCounter(){
+          let count = document.getElementById('counter');
+          let countValue = parseInt(count.innerText);
+          count.innerText = countValue - 1;
+          console.log(count.innerText);
+        }
+
+        function PutAdivOnPage(){
+          let buttonvalue = document.getElementById('Put a div').innerText;
+          console.log(buttonvalue);
+          let myElement = document.createElement('div');
+          myElement.innerText = buttonvalue;
+          document.body.appendChild(myElement);
+        }
+    </script>
+</html>

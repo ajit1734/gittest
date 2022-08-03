@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>
+            Exercise 9
+        </title>
+    </head>
+    <body>
+        <div id = 'cart'></div>
+        <button id = "addApple" onclick="addApple()"> Apple</button>
+        <button id = "addTomato" onclick="addTomato()" > Tomato</button>
+        <button id = "addEggs" onclick="addEggs()"> Eggs</button>
+        <button id = "clear" onclick="clearall()"> clear</button>
+    </body>
+
+    <script>
+        cartlist= [];
+        console.log(cartlist);
+        function addApple(){
+          let buttonText = document.getElementById('addApple').innerText;
+            cartlist.push(buttonText);
+            render();
+             
+        }
+        function addTomato(){
+            let buttonText = document.getElementById('addTomato').innerText;
+              cartlist.push(buttonText);
+              render();
+               
+          }
+          function addEggs(){
+            let buttonText = document.getElementById('addEggs').innerText;
+              cartlist.push(buttonText);
+              render();
+               
+          }  
+
+          function clearall(){
+            document.getElementById('cart').innerHTML = '';
+          }
+
+
+        function render(){
+            document.getElementById('cart').innerHTML = '';
+            cartlist.forEach(function (thisItem){
+            let element = document.createElement('div');
+            element.innerText = thisItem;
+            let mydiv = document.getElementById('cart');
+            mydiv.appendChild(element);
+      })
+
+
+
+    }
+    </script>
+
+
+
+
+
+</html>

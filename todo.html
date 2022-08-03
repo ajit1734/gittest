@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <title>My Todo App</title>
+  </head>
+  <body>
+    
+    <input id="todo-title" type="text" />
+    <input id = "date_picker" type="date"></input>
+    <button onclick="addTodo()">Add Todo</button>
+
+    <div id="todo-list"></div>
+
+    <script>
+      //MODEL
+
+      //if local storage has a todos array then use it otherwise use the default array.
+      let todos;
+
+
+      //retrieve localstorage and convert it into array
+      const savedTodos = JSON.parse(localStorage.getItem('keyoftodo'));//provided the key
+      //check if its an array
+
+
+      if(Array.isArray(savedTodos)){
+        todos = savedTodos;
+      }else{
+        todos = [{
+          title : 'Get groceries',
+          dueDate : '2021-10-04',
+          id : 'id1'
+          }, 
+          {title : 'Wash car',
+           dueDate : '2021-11-05',
+           id : 'id2'
+          },
+          {title : 'Make dinner',
+           dueDate : '2021-11-05',
+           id : 'id3'
+          }];
+      }
+      render();//direct render whatever is written in the todo
+
+      //save todos list to local storage
+      function saveTodos(){
+        localStorage.setItem('keyoftodo', JSON.stringify(todos));
+      }
+
+
+      function createToDo(titleOfCreation , dueDateofCreation){
+        //create a id
+        const id =''+ new Date().getTime();//get the currnet date and time in browser and returns the number and lets typecast it to string
+        
+        todos.push({//as we are pushing an object we need define value for each key
+          
+          title: titleOfCreation , 
+          dueDate:dueDateofCreation,
+          id : id
+        });
+        saveTodos();//save the updated list to local storage.
+      }  
+
+      function removeToDo(idtoDelete){
+        todos = todos.filter(function (thistoDo){//here we have reassigned the updated todo that removed the false values and updated the resulting array.
+          //if the id of this todo matches idToDelete, return false
+          //for everything else return true
+          if(thistoDo.id===idtoDelete){
+            return false;
+          }else{
+            return true;
+          }
+        });
+
+        saveTodos();
+      }
+
+
+      
+      //Controller
+      function addTodo() {
+        //get the title
+        const textbox = document.getElementById('todo-title');//this function returns an HTML element
+        const titleValue = textbox.value; //we manipulate the HTML element and get the value and later we use these values to add an item to the list
+        //get the due date
+        const datePicker = document.getElementById('date_picker');//this function returns an HTML element
+        const dueDateValue = datePicker.value;//we manipulate the HTML element and get the value and later we use these values to add an item to the list
+
+        createToDo(titleValue,dueDateValue);        
+        render();//this renders the whatever is there in the toDos array.
+      }
+
+
+      function deleteToDo(event){
+        console.log(event);
+        const deleteButton = event.target;//we get the object of target by using target and it includes the id of this html element
+        const idtoDeleteValue = deleteButton.id;//we stored the id over here and it is obtained as a string and not number.
+        //remove a value from array.First loop over the values in the array and filter method of array removes the element when it gets a value false on that element
+        
+        removeToDo(idtoDeleteValue);
+
+        render();
+      }
+
+
+      //VIEW
+      function render() {
+        // reset our list or clear the HTML part of a div
+        document.getElementById('todo-list').innerHTML = '';
+
+        todos.forEach(function (todo) {
+          const toDoItemElement = document.createElement('div');
+          toDoItemElement.innerText = todo.title +' and due date is: '+ todo.dueDate;
+          
+              //create a button element and append it to the above div element
+              const deleteButton = document.createElement('button');
+              deleteButton.innerText = 'Delete';
+              deleteButton.style = 'margin-left : 12px';
+              deleteButton.id = todo.id;//delete button ki id wo hogi jo todo me id h
+              deleteButton.onclick = deleteToDo;//we dont need to use brackets when calling a function in DOM
+              toDoItemElement.appendChild(deleteButton);
+
+          //get the item where we want to append rhe toDoItemElement and appending it will also append the delete button 
+          //because the delete button is there with the each toDOItemElement
+          const todoList = document.getElementById('todo-list');
+          todoList.appendChild(toDoItemElement);
+        });
+      }
+    </script>
+  </body>
+</html>

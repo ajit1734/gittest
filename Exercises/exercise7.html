@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Hello World
+        </title>
+    </head>
+    <body>
+
+    </body>
+
+    <script>
+        function toUpper(stringArr) {
+            let result = [];
+          
+            stringArr.forEach(function (str) {
+              result.push(str.toUpperCase());
+            })
+            
+            console.log(result);
+        }
+        toUpper(['Hello', 'World']);
+
+        function arraydouble(stringarr){
+            let doubleArr = [];    
+            stringarr.forEach(function (thistr){
+                doubleArr.push(thistr);
+                doubleArr.push(thistr);
+            })
+            console.log(doubleArr);  
+        }
+
+        arraydouble(['Hello', 'Double']);
+
+        function sumNum(numArr){
+            let sum = 0;    
+            numArr.forEach(function (thisNum){
+                sum = sum+thisNum
+            })
+            console.log(sum);  
+        }
+
+        sumNum([1,2,3,-4]);
+
+        
+    </script>
+
+
+</html>
